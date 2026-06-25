@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Fish Species & Catch Recorder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f7ff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      color: #0077be;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #0077be;
+    }
+    input[type="file"] {
+      background-color: #f0f8ff;
+      padding: 10px;
+      border: 1px solid #b3e0ff;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 400px;
+    }
+    input[type="number"] {
+      padding: 10px;
+      border: 1px solid #b3e0ff;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 400px;
+    }
+    button {
+      background-color: #0077be;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #005a8e;
+    }
+    .link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #0077be;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .link:hover {
+      color: #005a8e;
+      text-decoration: underline;
+    }
+    .fish-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="fish-icon">🐟</div>
+    <h2>Smart Fish Species & Catch Recorder</h2>
+    
+    <form action="/predict" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="image">Upload Fish Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="quantity">Enter Quantity (number of fish):</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="kilogram">Enter Weight (kg):</label>
+        <input type="number" id="kilogram" name="kilogram" min="0" step="0.1" value="0.0">
+      </div>
+      
+
+      
+      <button type="submit">Predict & Record</button>
+    </form>
+    
+    <div style="margin-top: 20px;">
+      <a href="/records" class="link" style="padding: 10px 20px; background-color: #0077be; color: white; border-radius: 5px; text-decoration: none;">View All Records</a>
+    </div>
+  </div>
+</body>
+</html>

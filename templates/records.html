@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catch Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e6f7ff;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #0077be;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #0077be;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f0f8ff;
+        }
+        tr:hover {
+            background-color: #e6f7ff;
+            transition: background-color 0.3s;
+        }
+        img {
+            max-width: 120px;
+            height: auto;
+            border-radius: 5px;
+            border: 2px solid #0077be;
+            transition: transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.5);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 20px auto;
+            background-color: #0077be;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #005a8e;
+            transform: translateY(-2px);
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .no-records {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎣 Your Catch Records</h1>
+        
+        {% if records %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Species</th>
+                <th>Quantity</th>
+                <th>Kilogram (kg)</th>
+                <th>Date</th>
+                <th>Image</th>
+            </tr>
+            {% for r in records %}
+            <tr>
+                <td>{{ r[0] }}</td>
+                <td>{% if r[1] %}{{ r[1] }}{% else %}Unknown{% endif %}</td>
+                <td>{{ r[2] }}</td>
+                <td>{{ r[3] }}</td>
+                <td>{{ r[4] }}</td>
+                <td>
+                    {% if r[5] and r[5] is string %}
+                        <img src="{{ url_for('static', filename=r[5].split('/')[-1]) }}" alt="{{ r[1] }}">
+                    {% else %}
+                        <span>No Image</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div class="no-records">
+            <p>No catch records found. Start by adding your first catch!</p>
+        </div>
+        {% endif %}
+        
+        <div class="btn-container">
+            <a href="/" class="btn">🏠 Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
